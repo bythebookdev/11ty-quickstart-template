@@ -9,7 +9,7 @@
 <p>Make sure you have <a href="https://nodejs.org/en/download">Node.js</a> and <a href="https://git-scm.com/">Git</a> installed.
 The following guide assumes you are fluent with <a href="https://www.w3schools.com/git/default.asp">Git</a> and <a href="https://www.w3schools.com/bash/">bash</a> commands.</p>
 <h4>On GitHub website, Create a <em>public</em> GitHub repo</h4>
-<p>If you name your public repo <code>account-name.github.io</code> using your GitHub account name (personal or organisation), your website URL will look like <code>https://account-name.github.io</code>. With any other name (e.g. <code>your-repo-name</code>) it will look like a subfolder (<code>https://account-name.github.io/your-repo-name</code>). You can only have one website associated with account name and as many subfolders as you wish.</p>
+<p>If you name your public repo <code>account-name.github.io</code> using your GitHub account name (personal or organisation), your website URL will look like <code>https://account-name.github.io</code>. With any other name (e.g. <code>your-repo-name</code>) it will look like a subfolder (<code>https://account-name.github.io/your-repo-name/</code>). You can only have one website associated with account name and as many subfolders as you wish.</p>
 <h4>Clone repo from GitHub</h4>
 <p>Copy your repo URL from GitHub. Execute <code>git clone</code>:</p>
 <pre><code>git clone your-repo-URL-goes-here
@@ -29,7 +29,7 @@ node_modules/
 </code></pre>
 <p>Nothing is cached right now, but it won't hurt to have .cache folder ignored for later</p>
 <h3>Now let us deploy to GitHub pages</h3>
-<h4>From <a href="https://www.11ty.dev/docs/deployment/">Deploy an Eleventy project to GitHub Pages Mini-Tutorial</a>.</h4>
+<h4>From <a href="https://www.11ty.dev/docs/deployment/#mini-tutorials">Deploy an Eleventy project to GitHub Pages Mini-Tutorial</a>.</h4>
 <p>Before first deploy has ever happened we cannot execute steps 1 and 2 of tutorial, because <code>gh-pages</code> branch does not exist yet. See <a href="https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#%EF%B8%8F-first-deployment-with-github_token">First Deployment with <code>GITHUB_TOKEN</code></a></p>
 <ol start="3">
 <li>Add &quot;build-ghpages&quot; command to your <code>package.json</code> scripts section
@@ -39,17 +39,16 @@ If your repo name is <code>account-name.github.io</code>:</li>
   &quot;build-ghpages&quot;: &quot;npx @11ty/eleventy&quot;,
 }
 </code></pre>
-<p>else</p>
+<p>else (case of subfolder)</p>
 <pre><code>&quot;scripts&quot;: {
   &quot;build-ghpages&quot;: &quot;npx @11ty/eleventy --pathprefix=/your-repo-name/&quot;,
 }
 </code></pre>
+<p>Consult <a href="https://www.11ty.dev/docs/config/#deploy-to-a-subdirectory-with-a-path-prefix">Deploy to a subdirectory with a Path Prefix</a> if you have absolute URLs in your HTML.</p>
 <ol start="4">
 <li>Create a new GitHub workflow file in <code>.github/workflows/deploy-to-ghpages.yml</code>
-Populate this file as advised in mini-tutorial</li>
+Populate this file as advised in mini-tutorial.</li>
 </ol>
-<h4>Add an empty <code>.nojekyll</code> file in your repo root</h4>
-<p>This step shouldn't be required but for some reason nothing works without it</p>
 <h4>Make sure your GitHub Personal Access Token has <code>workflow</code> permission.</h4>
 <p>If you have never created a personal access token, look <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic">here</a>. During step 8 (Select the scope) make sure <code>repo</code> and <code>workflow</code> checkboxes are checked.</p>
 <h4>Make your first commit</h4>
@@ -58,9 +57,17 @@ git add .									# add your files to staging area
 git commit -m &quot;Initial commit&quot;				# create new commit
 git push -u	origin main						# push your local main branch to remote
 </code></pre>
+<h4>Return to <a href="https://www.11ty.dev/docs/deployment/#mini-tutorials">Deploy an Eleventy project to GitHub Pages Mini-Tutorial</a></h4>
+<p>Now we can perform steps 1 and 2</p>
+<ol>
+<li>
+<p>Go to GitHub -&gt; repo Settings &gt; Code and Automation -&gt; Pages</p>
+</li>
+<li>
+<p>Set Deploy from a branch. Source branch: <code>gh-pages</code>. Source folder: <code>/ (root)</code></p>
+</li>
+</ol>
 <h4>Make second commit</h4>
-<pre><code>git add .
-git commit -m &quot;Enable deploy to GitHub Pages&quot;
-git push -u origin main
-</code></pre>
+<p>Trigger deploy again by making more changes (for example adding more content).</p>
+<h4>Enjoy :)</h4>
 </div>
