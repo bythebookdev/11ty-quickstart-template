@@ -55,10 +55,6 @@ node_modules/
 .cache
 ```
 Nothing is cached right now, but it won't hurt to have .cache folder ignored
-#### Create GitHub workflow file for deploying on GitHub pages
-In repo root create `.github/workflows/deploy-to-ghpages.yml` file and populate it with content as shown [here (Step 4)](https://www.11ty.dev/docs/deployment/#deploy-an-eleventy-project-to-git-hub-pages).
-#### Make sure your GitHub Personal Access Token has `workflow` permission.
-If you have never created a personal access token, look [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic). During step 8 (Select the scope) check `repo` and `workflow` checkboxes.
 #### Make your first commit
 ```
 git config --global core.safecrlf false		# suppress CRLF -> LF warnings
@@ -68,3 +64,14 @@ git push -u origin main						# push your local main branch to remote
 ```
 If your Git Bash or other terminal is busy now serving your website, you can open a new one or terminate current process (In Git Bash press ctrl+C).
 
+### Now let us deploy to GitHub pages
+
+#### Follow [Deploy an Eleventy project to GitHub Pages mini tutorial](https://www.11ty.dev/docs/deployment/).
+#### Make sure your GitHub Personal Access Token has `workflow` permission.
+If you have never created a personal access token, look [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic). During step 8 (Select the scope) check `repo` and `workflow` checkboxes.
+#### Make second commit
+```
+git add .
+git commit -m "Enable deploy to GitHub Pages"
+git push -u origin main
+```
