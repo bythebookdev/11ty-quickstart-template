@@ -4,19 +4,14 @@
 <p>This template was created by following 11ty <a href="https://www.11ty.dev/docs/">Get Started</a> Guide.</p>
 <h2>Steps to recreate this website by yourself from scratch</h2>
 <h4>Prerequisites:</h4>
-<p>Make sure you have <a href="https://nodejs.org/en/download">Node.js</a> and <a href="https://git-scm.com/">Git</a> installed.</p>
-<p>On Windows, Git for Windows installs for you Git GUI and Git Bash. You can launch Git Bash from context menu (right-click) in any folder on your PC. (On Windows 11 choose 'Show more options').</p>
+<p>Make sure you have <a href="https://nodejs.org/en/download">Node.js</a> and <a href="https://git-scm.com/">Git</a> installed.
+The following guide assumes you are fluent with <a href="https://www.w3schools.com/git/default.asp">Git</a> and <a href="https://www.w3schools.com/bash/">bash</a> commands.</p>
 <h4>On GitHub website, Create a <em>public</em> GitHub repo</h4>
-<p>If you name your public repo <code>account-name.github.io</code> using your GitHub account name (personal or organisation), your website URL will look like <code>https://account-name.github.io</code>. With any other name (e.g. <code>my-repo-name</code>) it will look like a subfolder (<code>https://account-name.github.io/my-repo-name</code>). You can only have one website associated with your account name and as many subfolders as you wish.</p>
-<p>Your newly created GitHub repo is empty. GitHub shows you the URL to it under Quick Setup section (it is different from your future website URL).</p>
-<p>Copy your repo URL from GitHub.</p>
-<p>Navigate to some place on your PC where you want your repo (its local copy) to appear.</p>
+<p>If you name your public repo <code>account-name.github.io</code> using your GitHub account name (personal or organisation), your website URL will look like <code>https://account-name.github.io</code>. With any other name (e.g. <code>my-repo-name</code>) it will look like a subfolder (<code>https://account-name.github.io/my-repo-name</code>). You can only have one website associated with account name and as many subfolders as you wish.</p>
 <h4>Clone repo from GitHub</h4>
-<p>Open Git Bash and execute <code>git clone</code> providing your repo URL:</p>
+<p>Copy your repo URL from GitHub. Execute <code>git clone</code>:</p>
 <pre><code>git clone your-repo-URL-goes-here
 </code></pre>
-<p>Navigate inside the appeared folder named after your repo.</p>
-<p>To see all files and folders inside any folder use <a href="https://www.w3schools.com/bash/bash_ls.php"><code>ls</code></a> command and navigate inside any folder using <a href="https://www.w3schools.com/bash/bash_cd.php"><code>cd my-folder-name</code></a>.</p>
 <h4>Install Eleventy</h4>
 <p>Generate <code>package.json</code> file, -y flag skips questionnaire</p>
 <pre><code>npm init -y 
@@ -44,17 +39,28 @@ git add .									# add your files to staging area
 git commit -m &quot;Initial commit&quot;				# create new commit
 git push -u origin main						# push your local main branch to remote
 </code></pre>
-<p>If your Git Bash or other terminal is busy now serving your website, you can open a new one or terminate current process (In Git Bash press ctrl+C).</p>
 <h3>Now let us deploy to GitHub pages</h3>
 <h4>Follow <a href="https://www.11ty.dev/docs/deployment/">Deploy an Eleventy project to GitHub Pages mini tutorial</a>.</h4>
-<p>In case your website URL will be a subfolder (<code>account-name.github.io/my-repo-name</code>), add env section to your deploy-to-ghpages.yml like this</p>
-<pre><code>    env:
-        ELEVENTY_NOTES_PATH_PREFIX: &quot;my-repo-name&quot;
+<p>Steps to reproduce:</p>
+<ol>
+<li>Go to GitHub -&gt; repo Settings -&gt; Code and Automation section -&gt; Pages</li>
+<li>Under Build and Deployment select Source -&gt; Deploy from a branch, Select branch -&gt; main, Select folder -&gt; / (root)</li>
+<li>Add &quot;build-ghpages&quot; command to your <code>package.json</code> scripts section
+If your repo name is <code>account-name.github.io</code>:</li>
+</ol>
+<pre><code>&quot;scripts&quot;: {
+  &quot;build-ghpages&quot;: &quot;npx @11ty/eleventy&quot;,
+}
+</code></pre>
+<p>else</p>
+<pre><code>&quot;scripts&quot;: {
+  &quot;build-ghpages&quot;: &quot;npx @11ty/eleventy --pathprefix=/your-repo-name/&quot;,
+}
 </code></pre>
 <h4>Add an empty <code>.nojekyll</code> file in your repo root</h4>
 <p>This step shouldn't be needed but for me nothing works without it for some reason</p>
 <h4>Make sure your GitHub Personal Access Token has <code>workflow</code> permission.</h4>
-<p>If you have never created a personal access token, look <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic">here</a>. During step 8 (Select the scope) check <code>repo</code> and <code>workflow</code> checkboxes.</p>
+<p>If you have never created a personal access token, look <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic">here</a>. During step 8 (Select the scope) make sure <code>repo</code> and <code>workflow</code> checkboxes are checked.</p>
 <h4>Make second commit</h4>
 <pre><code>git add .
 git commit -m &quot;Enable deploy to GitHub Pages&quot;
