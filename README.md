@@ -9,25 +9,15 @@ This template was created by following 11ty [Get Started](https://www.11ty.dev/d
 ## Steps to recreate this website by yourself from scratch
 #### Prerequisites:
 Make sure you have [Node.js](https://nodejs.org/en/download) and [Git](https://git-scm.com/) installed.
-
-On Windows, Git for Windows installs for you Git GUI and Git Bash. You can launch Git Bash from context menu (right-click) in any folder on your PC. (On Windows 11 choose 'Show more options').
+The following guide assumes you are fluent with [Git](https://www.w3schools.com/git/default.asp) and [bash](https://www.w3schools.com/bash/) commands.
 #### On GitHub website, Create a *public* GitHub repo
-If you name your public repo `account-name.github.io` using your GitHub account name (personal or organisation), your website URL will look like `https://account-name.github.io`. With any other name (e.g. `my-repo-name`) it will look like a subfolder (`https://account-name.github.io/my-repo-name`). You can only have one website associated with your account name and as many subfolders as you wish.
-
-Your newly created GitHub repo is empty. GitHub shows you the URL to it under Quick Setup section (it is different from your future website URL).
-
-Copy your repo URL from GitHub.
-
-Navigate to some place on your PC where you want your repo (its local copy) to appear.
+If you name your public repo `account-name.github.io` using your GitHub account name (personal or organisation), your website URL will look like `https://account-name.github.io`. With any other name (e.g. `my-repo-name`) it will look like a subfolder (`https://account-name.github.io/my-repo-name`). You can only have one website associated with account name and as many subfolders as you wish.
 
 #### Clone repo from GitHub
-Open Git Bash and execute `git clone` providing your repo URL:
+Copy your repo URL from GitHub. Execute `git clone`:
 ```
 git clone your-repo-URL-goes-here
 ```
-Navigate inside the appeared folder named after your repo. 
-
-To see all files and folders inside any folder use [`ls`](https://www.w3schools.com/bash/bash_ls.php) command and navigate inside any folder using [`cd my-folder-name`](https://www.w3schools.com/bash/bash_cd.php).
 #### Install Eleventy
  
 Generate `package.json` file, -y flag skips questionnaire
@@ -55,6 +45,7 @@ node_modules/
 .cache
 ```
 Nothing is cached right now, but it won't hurt to have .cache folder ignored
+
 #### Make your first commit
 ```
 git config --global core.safecrlf false		# suppress CRLF -> LF warnings
@@ -62,20 +53,30 @@ git add .									# add your files to staging area
 git commit -m "Initial commit"				# create new commit
 git push -u origin main						# push your local main branch to remote
 ```
-If your Git Bash or other terminal is busy now serving your website, you can open a new one or terminate current process (In Git Bash press ctrl+C).
 
 ### Now let us deploy to GitHub pages
 
 #### Follow [Deploy an Eleventy project to GitHub Pages mini tutorial](https://www.11ty.dev/docs/deployment/).
-In case your website URL will be a subfolder (`account-name.github.io/my-repo-name`), add env section to your deploy-to-ghpages.yml like this
+Steps to reproduce:
+1. Go to GitHub -> repo Settings -> Code and Automation section -> Pages
+2. Under Build and Deployment select Source -> Deploy from a branch, Select branch -> main, Select folder -> / (root)
+3. Add "build-ghpages" command to your `package.json` scripts section
+If your repo name is `account-name.github.io`:
 ```
-    env:
-        ELEVENTY_NOTES_PATH_PREFIX: "my-repo-name"
+"scripts": {
+  "build-ghpages": "npx @11ty/eleventy",
+}
+```
+else
+```
+"scripts": {
+  "build-ghpages": "npx @11ty/eleventy --pathprefix=/your-repo-name/",
+}
 ```
 #### Add an empty `.nojekyll` file in your repo root
 This step shouldn't be needed but for me nothing works without it for some reason 
 #### Make sure your GitHub Personal Access Token has `workflow` permission.
-If you have never created a personal access token, look [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic). During step 8 (Select the scope) check `repo` and `workflow` checkboxes.
+If you have never created a personal access token, look [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic). During step 8 (Select the scope) make sure `repo` and `workflow` checkboxes are checked.
 #### Make second commit
 ```
 git add .
