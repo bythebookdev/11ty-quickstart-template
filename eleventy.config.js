@@ -1,5 +1,6 @@
 // Added RenderPlugin to inject README.md in index page
 import { RenderPlugin } from "@11ty/eleventy";
+import { HtmlBasePlugin } from "@11ty/eleventy";
 
 export default function (eleventyConfig) {
 	eleventyConfig.addPlugin(RenderPlugin, {
@@ -10,11 +11,5 @@ export default function (eleventyConfig) {
 		// Only available in Liquid right now
 		accessGlobalData: false,   // Does rendered content has access to the data cascade?
 	});
-};
-
-import { HtmlBasePlugin } from "@11ty/eleventy";
-
-export default function (eleventyConfig) {
 	eleventyConfig.addPlugin(HtmlBasePlugin);
 };
-
