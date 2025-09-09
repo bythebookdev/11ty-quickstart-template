@@ -13,6 +13,8 @@ jobs:
       contents: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
+    env:
+        ELEVENTY_NOTES_PATH_PREFIX: "11ty-quickstart-template"
     steps:
       - uses: actions/checkout@v3
 

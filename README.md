@@ -67,6 +67,13 @@ If your Git Bash or other terminal is busy now serving your website, you can ope
 ### Now let us deploy to GitHub pages
 
 #### Follow [Deploy an Eleventy project to GitHub Pages mini tutorial](https://www.11ty.dev/docs/deployment/).
+In case your website URL will be a subfolder (`account-name.github.io/my-repo-name`), add env section to your deploy-to-ghpages.yml like this
+```
+    env:
+        ELEVENTY_NOTES_PATH_PREFIX: "my-repo-name"
+```
+#### Add an empty `.nojekyll` file in your repo root
+This step shouldn't be needed but for me nothing works without it for some reason 
 #### Make sure your GitHub Personal Access Token has `workflow` permission.
 If you have never created a personal access token, look [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic). During step 8 (Select the scope) check `repo` and `workflow` checkboxes.
 #### Make second commit
