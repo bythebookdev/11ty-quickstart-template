@@ -11,33 +11,22 @@ This template was created by following 11ty [Get Started](https://www.11ty.dev/d
 Make sure you have [Node.js](https://nodejs.org/en/download) and [Git](https://git-scm.com/) installed.
 The following guide assumes you are fluent with [Git](https://www.w3schools.com/git/default.asp) and [bash](https://www.w3schools.com/bash/) commands.
 #### On GitHub website, Create a *public* GitHub repo
-If you name your public repo `account-name.github.io` using your GitHub account name (personal or organisation), your website URL will look like `https://account-name.github.io`. With any other name (e.g. `my-repo-name`) it will look like a subfolder (`https://account-name.github.io/my-repo-name`). You can only have one website associated with account name and as many subfolders as you wish.
+If you name your public repo `account-name.github.io` using your GitHub account name (personal or organisation), your website URL will look like `https://account-name.github.io`. With any other name (e.g. `your-repo-name`) it will look like a subfolder (`https://account-name.github.io/your-repo-name`). You can only have one website associated with account name and as many subfolders as you wish.
 
 #### Clone repo from GitHub
 Copy your repo URL from GitHub. Execute `git clone`:
 ```
 git clone your-repo-URL-goes-here
 ```
-#### Install Eleventy
- 
-Generate `package.json` file, -y flag skips questionnaire
+#### Install and Run Eleventy
 ```
-npm init -y 
-```
-Set usage of ESM instead of CommonJS
-```
-npm pkg set type="module"
-```
-Install eleventy and save it to package.json
-```
-npm install @11ty/eleventy
-```
-#### Run Eleventy
-```
-npx @11ty/eleventy --serve
+npm init -y						# Generate `package.json` file, -y flag skips questionnaire
+npm pkg set type="module"		# Set usage of ESM instead of CommonJS
+npm install @11ty/eleventy 		# Install eleventy and save it to package.json
+npx @11ty/eleventy --serve		# Run Eleventy
 ```
 #### Add Content and watch it appear live
-Create `index.md` or `index.html` with some content in repo root. Watch it change dynamically in browser on `http://localhost:8080/`. In this case RenderPlugin was added to `.eleventy.config.js` and `index.md` created to render README.md on index page.
+Create `index.md` or `index.html` with some content in repo root. Watch it change dynamically in browser on `http://localhost:8080/`. In this case RenderPlugin was added to `eleventy.config.js` and `index.md` created to render README.md on index page.
 #### Create `.gitignore` file in repo root with contents:
 ```
 _site/
@@ -51,7 +40,7 @@ Nothing is cached right now, but it won't hurt to have .cache folder ignored
 git config --global core.safecrlf false		# suppress CRLF -> LF warnings
 git add .									# add your files to staging area
 git commit -m "Initial commit"				# create new commit
-git push -u origin main						# push your local main branch to remote
+git push -u	origin main						# push your local main branch to remote
 ```
 
 ### Now let us deploy to GitHub pages
