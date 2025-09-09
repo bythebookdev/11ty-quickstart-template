@@ -9,44 +9,29 @@
 <p>Make sure you have <a href="https://nodejs.org/en/download">Node.js</a> and <a href="https://git-scm.com/">Git</a> installed.
 The following guide assumes you are fluent with <a href="https://www.w3schools.com/git/default.asp">Git</a> and <a href="https://www.w3schools.com/bash/">bash</a> commands.</p>
 <h4>On GitHub website, Create a <em>public</em> GitHub repo</h4>
-<p>If you name your public repo <code>account-name.github.io</code> using your GitHub account name (personal or organisation), your website URL will look like <code>https://account-name.github.io</code>. With any other name (e.g. <code>my-repo-name</code>) it will look like a subfolder (<code>https://account-name.github.io/my-repo-name</code>). You can only have one website associated with account name and as many subfolders as you wish.</p>
+<p>If you name your public repo <code>account-name.github.io</code> using your GitHub account name (personal or organisation), your website URL will look like <code>https://account-name.github.io</code>. With any other name (e.g. <code>your-repo-name</code>) it will look like a subfolder (<code>https://account-name.github.io/your-repo-name</code>). You can only have one website associated with account name and as many subfolders as you wish.</p>
 <h4>Clone repo from GitHub</h4>
 <p>Copy your repo URL from GitHub. Execute <code>git clone</code>:</p>
 <pre><code>git clone your-repo-URL-goes-here
 </code></pre>
-<h4>Install Eleventy</h4>
-<p>Generate <code>package.json</code> file, -y flag skips questionnaire</p>
-<pre><code>npm init -y 
-</code></pre>
-<p>Set usage of ESM instead of CommonJS</p>
-<pre><code>npm pkg set type=&quot;module&quot;
-</code></pre>
-<p>Install eleventy and save it to package.json</p>
-<pre><code>npm install @11ty/eleventy
-</code></pre>
-<h4>Run Eleventy</h4>
-<pre><code>npx @11ty/eleventy --serve
+<h4>Install and Run Eleventy</h4>
+<pre><code>npm init -y						# Generate `package.json` file, -y flag skips questionnaire
+npm pkg set type=&quot;module&quot;		# Set usage of ESM instead of CommonJS
+npm install @11ty/eleventy 		# Install eleventy and save it to package.json
+npx @11ty/eleventy --serve		# Run Eleventy
 </code></pre>
 <h4>Add Content and watch it appear live</h4>
-<p>Create <code>index.md</code> or <code>index.html</code> with some content in repo root. Watch it change dynamically in browser on <code>http://localhost:8080/</code>. In this case RenderPlugin was added to <code>.eleventy.config.js</code> and <code>index.md</code> created to render README.md on index page.</p>
+<p>Create <code>index.md</code> or <code>index.html</code> with some content in repo root. Watch it change dynamically in browser on <code>http://localhost:8080/</code>. In this case RenderPlugin was added to <code>eleventy.config.js</code> and <code>index.md</code> created to render README.md on index page.</p>
 <h4>Create <code>.gitignore</code> file in repo root with contents:</h4>
 <pre><code>_site/
 node_modules/
 .cache
 </code></pre>
-<p>Nothing is cached right now, but it won't hurt to have .cache folder ignored</p>
-<h4>Make your first commit</h4>
-<pre><code>git config --global core.safecrlf false		# suppress CRLF -&gt; LF warnings
-git add .									# add your files to staging area
-git commit -m &quot;Initial commit&quot;				# create new commit
-git push -u origin main						# push your local main branch to remote
-</code></pre>
+<p>Nothing is cached right now, but it won't hurt to have .cache folder ignored for later</p>
 <h3>Now let us deploy to GitHub pages</h3>
-<h4>Follow <a href="https://www.11ty.dev/docs/deployment/">Deploy an Eleventy project to GitHub Pages mini tutorial</a>.</h4>
-<p>Steps to reproduce:</p>
-<ol>
-<li>Go to GitHub -&gt; repo Settings -&gt; Code and Automation section -&gt; Pages</li>
-<li>Under Build and Deployment select Source -&gt; Deploy from a branch, Select branch -&gt; main, Select folder -&gt; / (root)</li>
+<h4>From <a href="https://www.11ty.dev/docs/deployment/">Deploy an Eleventy project to GitHub Pages Mini-Tutorial</a>.</h4>
+<p>Before first deploy has ever happened we cannot execute steps 1 and 2 of tutorial, because <code>gh-pages</code> branch does not exist yet. See <a href="https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#%EF%B8%8F-first-deployment-with-github_token">First Deployment with <code>GITHUB_TOKEN</code></a></p>
+<ol start="3">
 <li>Add &quot;build-ghpages&quot; command to your <code>package.json</code> scripts section
 If your repo name is <code>account-name.github.io</code>:</li>
 </ol>
@@ -59,10 +44,20 @@ If your repo name is <code>account-name.github.io</code>:</li>
   &quot;build-ghpages&quot;: &quot;npx @11ty/eleventy --pathprefix=/your-repo-name/&quot;,
 }
 </code></pre>
+<ol start="4">
+<li>Create a new GitHub workflow file in <code>.github/workflows/deploy-to-ghpages.yml</code>
+Populate this file as advised in mini-tutorial</li>
+</ol>
 <h4>Add an empty <code>.nojekyll</code> file in your repo root</h4>
-<p>This step shouldn't be needed but for me nothing works without it for some reason</p>
+<p>This step shouldn't be required but for some reason nothing works without it</p>
 <h4>Make sure your GitHub Personal Access Token has <code>workflow</code> permission.</h4>
 <p>If you have never created a personal access token, look <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic">here</a>. During step 8 (Select the scope) make sure <code>repo</code> and <code>workflow</code> checkboxes are checked.</p>
+<h4>Make your first commit</h4>
+<pre><code>git config --global core.safecrlf false		# suppress CRLF -&gt; LF warnings
+git add .									# add your files to staging area
+git commit -m &quot;Initial commit&quot;				# create new commit
+git push -u	origin main						# push your local main branch to remote
+</code></pre>
 <h4>Make second commit</h4>
 <pre><code>git add .
 git commit -m &quot;Enable deploy to GitHub Pages&quot;
