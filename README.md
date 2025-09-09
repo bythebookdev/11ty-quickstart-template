@@ -33,22 +33,13 @@ _site/
 node_modules/
 .cache
 ```
-Nothing is cached right now, but it won't hurt to have .cache folder ignored
-
-#### Make your first commit
-```
-git config --global core.safecrlf false		# suppress CRLF -> LF warnings
-git add .									# add your files to staging area
-git commit -m "Initial commit"				# create new commit
-git push -u	origin main						# push your local main branch to remote
-```
+Nothing is cached right now, but it won't hurt to have .cache folder ignored for later
 
 ### Now let us deploy to GitHub pages
 
-#### Follow [Deploy an Eleventy project to GitHub Pages mini tutorial](https://www.11ty.dev/docs/deployment/).
-Steps to reproduce:
-1. Go to GitHub -> repo Settings -> Code and Automation section -> Pages
-2. Under Build and Deployment select Source -> Deploy from a branch, Select branch -> main, Select folder -> / (root)
+#### From [Deploy an Eleventy project to GitHub Pages Mini-Tutorial](https://www.11ty.dev/docs/deployment/).
+Before first deploy has ever happened we cannot execute steps 1 and 2 of tutorial, because `gh-pages` branch does not exist yet. See [First Deployment with `GITHUB_TOKEN`](https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#%EF%B8%8F-first-deployment-with-github_token)
+
 3. Add "build-ghpages" command to your `package.json` scripts section
 If your repo name is `account-name.github.io`:
 ```
@@ -62,10 +53,19 @@ else
   "build-ghpages": "npx @11ty/eleventy --pathprefix=/your-repo-name/",
 }
 ```
+4. Create a new GitHub workflow file in `.github/workflows/deploy-to-ghpages.yml`
+Populate this file as advised in mini-tutorial
 #### Add an empty `.nojekyll` file in your repo root
-This step shouldn't be needed but for me nothing works without it for some reason 
+This step shouldn't be required but for some reason nothing works without it
 #### Make sure your GitHub Personal Access Token has `workflow` permission.
 If you have never created a personal access token, look [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic). During step 8 (Select the scope) make sure `repo` and `workflow` checkboxes are checked.
+#### Make your first commit
+```
+git config --global core.safecrlf false		# suppress CRLF -> LF warnings
+git add .									# add your files to staging area
+git commit -m "Initial commit"				# create new commit
+git push -u	origin main						# push your local main branch to remote
+```
 #### Make second commit
 ```
 git add .
