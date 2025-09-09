@@ -47,6 +47,12 @@ git push -u origin main						# push your local main branch to remote
 <p>If your Git Bash or other terminal is busy now serving your website, you can open a new one or terminate current process (In Git Bash press ctrl+C).</p>
 <h3>Now let us deploy to GitHub pages</h3>
 <h4>Follow <a href="https://www.11ty.dev/docs/deployment/">Deploy an Eleventy project to GitHub Pages mini tutorial</a>.</h4>
+<p>In case your website URL will be a subfolder (<code>account-name.github.io/my-repo-name</code>), add env section to your deploy-to-ghpages.yml like this</p>
+<pre><code>    env:
+        ELEVENTY_NOTES_PATH_PREFIX: &quot;my-repo-name&quot;
+</code></pre>
+<h4>Add an empty <code>.nojekyll</code> file in your repo root</h4>
+<p>This step shouldn't be needed but for me nothing works without it for some reason</p>
 <h4>Make sure your GitHub Personal Access Token has <code>workflow</code> permission.</h4>
 <p>If you have never created a personal access token, look <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic">here</a>. During step 8 (Select the scope) check <code>repo</code> and <code>workflow</code> checkboxes.</p>
 <h4>Make second commit</h4>
