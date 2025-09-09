@@ -73,5 +73,5 @@ Now we can perform steps 1 and 2
 
 2. Set Deploy from a branch. Source branch: `gh-pages`. Source folder: `/ (root)`
 #### Make second commit
-Trigger deploy again by making more changes (for example adding more content).
+Trigger deploy again by making more changes (for example adding more content), commit and push.
 #### Enjoy :)
