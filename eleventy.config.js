@@ -13,3 +13,6 @@ export default function (eleventyConfig) {
 	});
 	eleventyConfig.addPlugin(HtmlBasePlugin);
 };
+export const config = {
+	pathPrefix: "/test-35/",
+}
