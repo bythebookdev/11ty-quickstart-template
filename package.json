@@ -4,7 +4,7 @@
   "description": "Use this template of a website to test out Eleventy project deployed on GitHub Pages",
   "main": "eleventy.config.js",
   "scripts": {
-	"build-ghpages": "npx @11ty/eleventy --pathprefix=11ty-quickstart-template",
+	"build-ghpages": "npx @11ty/eleventy --pathprefix='11ty-quickstart-template'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
