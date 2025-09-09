@@ -1,0 +1,24 @@
+{
+  "name": "11ty-quickstart-template",
+  "version": "1.0.0",
+  "description": "Use this template of a website to test out Eleventy project deployed on GitHub Pages",
+  "main": "eleventy.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bythebookdev/11ty-quickstart-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bythebookdev/11ty-quickstart-template/issues"
+  },
+  "homepage": "https://github.com/bythebookdev/11ty-quickstart-template#readme",
+  "type": "module",
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}
